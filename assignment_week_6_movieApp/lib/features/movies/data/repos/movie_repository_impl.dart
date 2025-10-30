@@ -1,4 +1,4 @@
-import 'package:themeandpagination/features/home/data/data_source/movie_remote_data_source.dart';
+import 'package:themeandpagination/features/movies/data/data_source/movie_remote_data_source.dart';
 
 import '../../domain/entities/movie.dart';
 import '../../domain/repositories/movie_repository.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:themeandpagination/core/databases/api/end_points.dart';
-import 'package:themeandpagination/features/home/domain/entities/movie.dart';
+import 'package:themeandpagination/features/movies/domain/entities/movie.dart';
 
 class MovieDetailScreen extends StatelessWidget {
   final Movie movie;

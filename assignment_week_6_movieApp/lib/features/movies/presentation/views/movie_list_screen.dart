@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:themeandpagination/core/cubits/theme_cubit.dart';
 import 'package:themeandpagination/core/cubits/theme_state.dart';
 import 'package:themeandpagination/core/databases/api/end_points.dart';
-import 'package:themeandpagination/features/home/presentation/cubits/movie_cubit/movie_cubit.dart';
-import 'package:themeandpagination/features/home/presentation/cubits/movie_cubit/movie_state.dart';
+import 'package:themeandpagination/features/movies/presentation/cubits/movie_cubit/movie_cubit.dart';
+import 'package:themeandpagination/features/movies/presentation/cubits/movie_cubit/movie_state.dart';
 
 import 'movie_detail_screen.dart';
 

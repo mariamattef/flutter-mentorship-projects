@@ -7,12 +7,12 @@ import 'package:themeandpagination/core/cubits/theme_cubit.dart';
 import 'package:themeandpagination/core/cubits/theme_state.dart';
 import 'package:themeandpagination/core/databases/api/dio_consumer.dart';
 import 'package:themeandpagination/core/databases/cache/cache_helper.dart';
-import 'package:themeandpagination/features/home/data/data_source/movie_remote_data_source.dart';
-import 'package:themeandpagination/features/home/data/repos/movie_repository_impl.dart'
+import 'package:themeandpagination/features/movies/data/data_source/movie_remote_data_source.dart';
+import 'package:themeandpagination/features/movies/data/repos/movie_repository_impl.dart'
     show MovieRepositoryImpl;
-import 'package:themeandpagination/features/home/domain/use_cases/get_popular_movies.dart';
-import 'package:themeandpagination/features/home/presentation/cubits/movie_cubit/movie_cubit.dart';
-import 'package:themeandpagination/features/home/presentation/views/movie_list_screen.dart';
+import 'package:themeandpagination/features/movies/domain/use_cases/get_popular_movies.dart';
+import 'package:themeandpagination/features/movies/presentation/cubits/movie_cubit/movie_cubit.dart';
+import 'package:themeandpagination/features/movies/presentation/views/movie_list_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
