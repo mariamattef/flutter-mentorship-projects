@@ -18,7 +18,7 @@ class MovieDetailScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Image.network(
-              "$imageBaseUrl${movie.posterPath}",
+              "${EndPoints.imageBaseUrl}${movie.posterPath}",
               height: 400,
               fit: BoxFit.cover,
               errorBuilder: (_, __, ___) => Container(

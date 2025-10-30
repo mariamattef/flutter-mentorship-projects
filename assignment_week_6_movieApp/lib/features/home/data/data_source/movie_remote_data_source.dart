@@ -15,7 +15,7 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
   @override
   Future<List<MovieModel>> getPopularMovies({required int page}) async {
     final response = await api.get(
-      EndPoints.pupular,
+      EndPoints.popular,
       queryParameters: {
         "api_key": dotenv.env['API_KEY'],
         "language": "en-US",

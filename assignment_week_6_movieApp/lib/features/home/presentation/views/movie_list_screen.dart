@@ -102,7 +102,7 @@ class _MovieListScreenState extends State<MovieListScreen> {
                                       width: 110,
                                       height: 150,
                                       child: Image.network(
-                                        "$imageBaseUrl${movie.posterPath}",
+                                        "${EndPoints.imageBaseUrl}${movie.posterPath}",
                                         fit: BoxFit.cover,
                                         errorBuilder: (_, __, ___) => Container(
                                           width: 120,
