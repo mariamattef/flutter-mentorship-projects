@@ -7,9 +7,13 @@ import 'package:themeandpagination/core/cubits/theme_cubit.dart';
 import 'package:themeandpagination/core/cubits/theme_state.dart';
 import 'package:themeandpagination/core/databases/api/dio_consumer.dart';
 import 'package:themeandpagination/core/databases/cache/cache_helper.dart';
+import 'package:themeandpagination/core/services/hive_service.dart';
+import 'package:hive/hive.dart';
+import 'package:themeandpagination/features/movies/data/data_source/movie_local_data_source.dart';
 import 'package:themeandpagination/features/movies/data/data_source/movie_remote_data_source.dart';
 import 'package:themeandpagination/features/movies/data/repos/movie_repository_impl.dart'
     show MovieRepositoryImpl;
+import 'package:themeandpagination/features/movies/domain/use_cases/get_genres.dart';
 import 'package:themeandpagination/features/movies/domain/use_cases/get_popular_movies.dart';
 import 'package:themeandpagination/features/movies/presentation/cubits/movie_cubit/movie_cubit.dart';
 import 'package:themeandpagination/features/movies/presentation/views/movie_list_screen.dart';
@@ -18,14 +22,22 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: ".env");
   await CacheHelper().init();
-  final repository = MovieRepositoryImpl(
-    MovieRemoteDataSourceImpl(api: DioConsumer(dio: Dio())),
-  );
+  HiveService.init();
+
+  final dioConsumer = DioConsumer(dio: Dio());
+  final remoteDataSource = MovieRemoteDataSourceImpl(api: dioConsumer);
+  final localDataSource = MovieLocalDataSourceImpl(Hive);
+  final repository = MovieRepositoryImpl(remoteDataSource, localDataSource);
+
   final getMovies = GetPopularMovies(repository);
+  final getGenres = GetGenres(repository);
 
   runApp(
-    BlocProvider(
-      create: (context) => ThemeCubit(),
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => ThemeCubit()),
+        BlocProvider(create: (_) => MovieCubit(getMovies, getGenres)..fetchMovies()),
+      ],
       child: MyApp(getMovies: getMovies),
     ),
   );
@@ -45,10 +57,7 @@ class MyApp extends StatelessWidget {
           theme: AppTheme.lightTheme,
           darkTheme: AppTheme.darkTheme,
           themeMode: state.themeMode,
-          home: BlocProvider(
-            create: (_) => MovieCubit(getMovies)..fetchMovies(),
-            child: const MovieListScreen(),
-          ),
+          home: const MovieListScreen(),
         );
       },
     );

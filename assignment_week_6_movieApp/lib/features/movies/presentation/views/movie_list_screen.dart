@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:themeandpagination/core/cubits/theme_cubit.dart';
 import 'package:themeandpagination/core/cubits/theme_state.dart';
 import 'package:themeandpagination/core/databases/api/end_points.dart';
+import 'package:themeandpagination/features/movies/data/models/genre_model.dart';
+import 'package:themeandpagination/features/movies/domain/entities/genre.dart';
 import 'package:themeandpagination/features/movies/presentation/cubits/movie_cubit/movie_cubit.dart';
 import 'package:themeandpagination/features/movies/presentation/cubits/movie_cubit/movie_state.dart';
 
@@ -102,7 +104,8 @@ class _MovieListScreenState extends State<MovieListScreen> {
                                       width: 110,
                                       height: 150,
                                       child: Image.network(
-                                        "${EndPoints.imageBaseUrl}${movie.posterPath}",
+                                        EndPoints.imageBaseUrl +
+                                            movie.posterPath,
                                         fit: BoxFit.cover,
                                         errorBuilder: (_, __, ___) => Container(
                                           width: 120,
@@ -140,6 +143,25 @@ class _MovieListScreenState extends State<MovieListScreen> {
                                               " ${movie.voteAverage.toStringAsFixed(1)}/10",
                                             ),
                                           ],
+                                        ),
+                                        SizedBox(height: 8),
+                                        Text(
+                                          movie.genreIds
+                                              .map(
+                                                (genreId) => (state.genres)
+                                                    .firstWhere(
+                                                      (genre) =>
+                                                          (genre).id == genreId,
+                                                                                                        orElse: () => GenreModel(
+                                                                                                          id: 0,
+                                                                                                          name: 'N/A',
+                                                                                                        ),                                                    )
+                                                    .name,
+                                              )
+                                              .join(', '),
+                                          style: const TextStyle(
+                                            color: Colors.grey,
+                                          ),
                                         ),
                                       ],
                                     ),

@@ -18,7 +18,7 @@ class MovieDetailScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Image.network(
-              "${EndPoints.imageBaseUrl}${movie.posterPath}",
+              EndPoints.imageBaseUrl + movie.posterPath,
               height: 400,
               fit: BoxFit.cover,
               errorBuilder: (_, __, ___) => Container(
@@ -64,10 +64,7 @@ class MovieDetailScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
 
-                  Text(
-                    movie.overview ?? "",
-                    style: const TextStyle(fontSize: 16),
-                  ),
+                  Text(movie.overview, style: const TextStyle(fontSize: 16)),
                 ],
               ),
             ),

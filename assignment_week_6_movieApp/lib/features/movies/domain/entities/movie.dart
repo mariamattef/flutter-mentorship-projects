@@ -1,10 +1,10 @@
 class Movie {
   final int id;
   final String title;
-  final String? overview;
-  final String? posterPath;
+  final String overview;
+  final String posterPath;
   final double voteAverage;
-  final String? genre;
+  final List<int> genreIds;
 
   Movie({
     required this.id,
@@ -12,6 +12,6 @@ class Movie {
     required this.overview,
     required this.posterPath,
     required this.voteAverage,
-    this.genre,
+    required this.genreIds,
   });
 }

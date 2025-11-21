@@ -1,6 +1,7 @@
 import 'package:hive/hive.dart';
 
 import '../../domain/entities/movie.dart';
+
 part 'movie_model.g.dart';
 
 
@@ -28,7 +29,7 @@ class MovieModel extends Movie with HiveObjectMixin {
 
   @HiveField(5)
   @override
-  final String? genre;
+  final List<int> genreIds;
 
   MovieModel({
     required this.id,
@@ -36,14 +37,14 @@ class MovieModel extends Movie with HiveObjectMixin {
     required this.overview,
     required this.posterPath,
     required this.voteAverage,
-    this.genre,
+    required this.genreIds,
   }) : super(
          id: id,
          title: title,
          overview: overview,
          posterPath: posterPath,
          voteAverage: voteAverage,
-         genre: genre,
+         genreIds: genreIds,
        );
 
   factory MovieModel.fromJson(Map<String, dynamic> json) {
@@ -53,6 +54,7 @@ class MovieModel extends Movie with HiveObjectMixin {
       overview: json['overview'] ?? '',
       posterPath: json['poster_path'],
       voteAverage: (json['vote_average'] as num).toDouble(),
+      genreIds: List<int>.from(json['genre_ids']),
     );
   }
 }
